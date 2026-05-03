@@ -18,11 +18,23 @@ p{
     font-style: italic;
     font-size: 18px;
 }
-/*------------------------------color-----------------------*/
+
+/*------------------- BACKGROUNDS & COLORS -----------------*/
+.bg-white {
+    background-color: #ffffff;
+}
+.clr-dark {
+    color: #1a1a1a; /* Pour le titre */
+}
+.clr-grey {
+    color: #4a4a4a; /* Pour le paragraphe */
+}
+.clr-accent {
+    color: #fa526c; /* La couleur rose/rouge du #Webdev */
+}
 .clr-white{
     color: white;
 }
-
 /*------------------------------TEXTE-----------------------*/
 
 .suppuce{
@@ -48,19 +60,22 @@ p{
 
 /*-------------------CLASSE DE TAILLE--------------*/
 
-.w-100{
+.w100{
     width: 100%;
 }
 
-.w-50{
+.w50{
     width: 50%;
 }
 
-.w-48{
+.w48{
     width: 48%;
 }
+.w40{
+    width: 40%;
+}
 
-.w-30{
+.w30{
     width: 30%;
 }
 
@@ -155,8 +170,22 @@ margin-bottom: 50px;
 .pad-50{
     padding: 50px;
 }
-.align-center{
-    align-items: center;
+
+/*----------------------------------------------------CONTAINER----------------------------------------------*/
+.container1000{
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container1100{
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container1200{
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /*--------------------------------- HEADER -----------------*/
@@ -176,20 +205,6 @@ header{
 
 /*--------------------------------- HERO -------------------------*/
 
-.hero-bg{
-    background-image: url('asset/banniere.png');
-    background-size: cover;
-    background-position: center;
-}
-.hero-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  height: 100vh;
-  margin-top: -100px; 
-  padding-top: 100p
-}
 .hero-text{
     max-width: 950px;
     margin-left: 120px;
@@ -202,7 +217,7 @@ header{
 }
 h1{
     
-    font-size: 88px;
+    font-size: 50px;
     font-family: "Andada Pro", serif;
 }
 h3{
@@ -212,70 +227,14 @@ h3{
     font-size: 20px;
     margin-top: 2px;
 }
-/* START NAV */
 
-.fl-column{
-    flex-direction: column;
+/*------------------- SECTION PROJETS-----------------*/
+.br-20 {
+    border-radius: 20px;
 }
-
-.pos-abs{
-  position: absolute;
-}
-
-.right-50{
-  right: 50px;
+.overflow-hidden {
+    overflow: hidden; /* Empêche l'image de dépasser des bords arrondis */
 }
 
-.center-y{
-  top: 50%;
-  transform: translateY(-50%);
-}
-/* LOGO ROTATE*/
-
-.left-50{
-  left: 50px;
-}
-
-.rotate-90{
-  transform: rotate(90deg);
-}
-
- 
-
-/*------------------------------- SECTION GET START -----------------*/
-.container{
-    max-width: 1100px;
-    margin: auto;
-    height: 100vh;
-}
-.txt-blk{
-    max-width: 500px;
-}
-.img-right{
-    width: 522px;
-    height: 720px;
-    object-fit: cover;
-}
-.btn-gold{
-    color: #FBD784;
-}
-h2{
-    font-size: 64px;
-    margin-bottom: 16px;
-}
-
-/* ---------------------------- Hiking Essentials ---------------------- */
-.flex-reverse {
-    flex-direction: row-reverse;
-}
-.img-left{
-    width: 522px;
-    height: 720px;
-    object-fit: cover;
-}
-.txt-king{
-    max-width: 500px;
-    line-height: 1.8em;
-}
 
 
