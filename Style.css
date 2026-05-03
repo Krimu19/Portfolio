@@ -8,11 +8,6 @@ body{
     background-color: rgb(35 37 59);
     color: white;
 }
-p{
-    font-family: Roboto,sans-serif;
-    font-size: 18px;
-
-}
 #font-josef{
     font-family: "Josefin Sans", sans-serif;
     font-style: italic;
@@ -126,11 +121,18 @@ p{
 .just-center{
     justify-content: center;
 }
+.column{
+    justify-content: column;
+}
 
 /*----------------------------------MARGIN ET PADDING-----------------------*/
 
 .mgt128{
     margin-top: 128px;
+}
+
+.mgt100{
+    margin-top: 100px;
 }
 
 .mgt50{
@@ -235,6 +237,70 @@ h3{
 .overflow-hidden {
     overflow: hidden; /* Empêche l'image de dépasser des bords arrondis */
 }
+/*------------------- SECTION QUALITER-----------------*/
+.bg-accent{
+    background-color: #fa526c;
+    padding: 50px;
+}
+.border-Q{
+    background-color: rgb(0, 0, 0);
+    border-radius: 15px;
+    padding: 20px 30px;
+}
 
+.ml150{
+    margin-left: 150px;
+}
 
+/*------------------- SECTION HOBBIES -----------------*/
 
+/* Système de Grille*/
+.d-grid { 
+    display: grid; 
+}
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+.col-span-2 {
+    grid-column: span 2; /*prendre deux colone a lieu de une */
+}
+
+.flex-col { 
+    display: flex; 
+    flex-direction: column; 
+}
+.just-end { 
+    justify-content: flex-end; /* Pousse le texte vers le bas */
+} 
+
+/* Positions et Superposition */
+
+.pos-rel { 
+    position: relative; 
+}
+.pos-abs { 
+    position: absolute; 
+}
+.z-1 { 
+    z-index: 1; 
+}
+
+.bento-card {
+    border-radius: 20px;
+    min-height: 250px; /* Hauteur minimum de base */
+    transition: transform 0.3s ease; /* Petit effet sublime au survol */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Légère bordure pour détacher du fond */
+}
+
+.bento-card:hover {
+    transform: scale(1.02); /* Grossit très légèrement au survol */
+}
+
+/* Le filtre sombre pour lire le texte sur n'importe quelle image */
+.card-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+    border-radius: 20px;
+    z-index: 0;
+}
