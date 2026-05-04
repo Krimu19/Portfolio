@@ -300,7 +300,31 @@ h3{
 .card-overlay {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%);
     border-radius: 20px;
     z-index: 0;
+}
+.bg-boxe{
+    background-image: url(asset/type-de-boxe-1-1.jpg);
+    background-position: bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.bg-asia{
+    background-image: url(asset/asiatique.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;    
+}
+.bg-cine{
+    background-image: url(asset/cinema.jpg);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;    
+}
+.bg-surv{
+    background-image: url(asset/survie-ile.jpg);
+    background-position: top;
+    background-size: cover;
+    background-repeat: no-repeat;    
 }
