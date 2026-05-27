@@ -328,3 +328,60 @@ h3{
     background-size: cover;
     background-repeat: no-repeat;    
 }
+
+/*------------------------
+         FOOTER
+--------------------------*/
+.bg-footer{
+    background-color: #fa526c;
+    padding: 100px;
+}
+
+
+/*------------------------
+        TIMELINE    
+--------------------------*/
+
+.timeline{
+    max-width: 1000px;
+    margin: auto;
+}
+
+.timeline-line{
+
+    padding: 5px;
+    background-color: #fa526c;
+    border-radius: 10px;
+}
+
+.timeline-point{
+    width: 30px;
+    height: 30px;
+    background-color: #fa526c;
+    border-radius: 50%;
+    position: relative;
+    z-index: 5;
+    border: 4px solid rgb(35 37 59);
+}
+
+.timeline-date{
+    color: #fa526c;
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+.ml225 {
+    margin-left: 225px;
+}
+.mgt10{
+    margin-top: 10px;
+}
+
+
+
+
+
+
+
+
+
