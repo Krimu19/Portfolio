@@ -237,6 +237,7 @@ h3{
 .overflow-hidden {
     overflow: hidden; /* Empêche l'image de dépasser des bords arrondis */
 }
+
 /*------------------- SECTION QUALITER-----------------*/
 .bg-accent{
     background-color: #fa526c;
@@ -330,15 +331,6 @@ h3{
 }
 
 /*------------------------
-         FOOTER
---------------------------*/
-.bg-footer{
-    background-color: #fa526c;
-    padding: 100px;
-}
-
-
-/*------------------------
         TIMELINE    
 --------------------------*/
 
@@ -361,7 +353,29 @@ h3{
     border-radius: 50%;
     position: relative;
     z-index: 5;
-    border: 4px solid rgb(35 37 59);
+}
+.grille-top, .grille-down{
+    position: relative;
+}
+.grille-down::after, .grille-top::after{
+    content:"";
+    width: 32px;
+    height: 32px;
+    display: block;
+    background-color: #fa526c;
+    border-radius: 50%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+.grille-top::after{
+    
+    top:106%;
+    left: 50%;
+   
+}
+.grille-down::after{
+    top: -32px;
+    left:50%;
 }
 
 .timeline-date{
@@ -377,9 +391,59 @@ h3{
     margin-top: 10px;
 }
 
+.just-end{
+    justify-content: flex-end;
+}
+.columnn{
 
+    flex-direction: column;
+}
 
+.container {  
+  display: grid;
+  grid-template-columns: 3fr 3fr 3fr 3fr 3fr;
+  grid-template-rows: 1.4fr 0.1fr 1.4fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "C1 c2 c3 c4 c5"
+    "time time time time time"
+    "d1 d2 d3 d4 d5";
+}
 
+.time { grid-area: time; }
+
+.C1 { grid-area: C1; }
+
+.c2 { grid-area: c2; }
+
+.c3 { grid-area: c3; }
+
+.c4 { grid-area: c4; }
+
+.c5 { grid-area: c5; }
+
+.d1 { grid-area: d1; }
+
+.d2 { grid-area: d2; }
+
+.d3 { grid-area: d3; }
+
+.d4 { grid-area: d4; }
+
+.d5 { grid-area: d5; }
+
+/*------------------------
+         FOOTER
+--------------------------*/
+.bg-footer{
+    background-color: #fa526c;
+    padding: 100px;
+}
+
+.logo-size{
+    font-size: x-large;
+}
 
 
 
