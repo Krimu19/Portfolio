@@ -162,6 +162,9 @@ margin-bottom: 50px;
 .mgb15{
     margin-bottom: 15px;
 }
+.ml100{
+    margin-left: 100px;
+}
 
 .pad-16{
     padding: 16px;
@@ -506,6 +509,11 @@ article h2 {
 .logo-size{
     font-size: x-large;
 }
+
+/* -------------------------
+            SWIPPER
+----------------------------*/
+
 
 /*------------------------
     MEDIA QUERIES - GRAND ÉCRANS
