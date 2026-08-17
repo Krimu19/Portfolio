@@ -21,42 +21,62 @@
     
 </head>
 <body>
-<header>
-    <div class="w30">
-    <img src="asset/logo_akram-removebg-preview (1).png" alt="logo de Portfolio" class="w30">
-    </div>
-    <nav class="flex gap50">
-        <a href="#Accueil" class="txt-none clr-white">Accueil</a>
-        <a href="#Mes projets" class="txt-none clr-white">Mes projets</a>
-        <a href="#À propos de moi" class="txt-none clr-white">À propos de moi</a>
-        <a href="#Contact" class="txt-none clr-white">Contact</a>
-    </nav>
+
+<header class="header">
+
+  <div class="logo">Akram<span> Bouzidi</span></div>
+
+  <nav class="nav">
+    <a href="#accueil" class="nav-link active">Accueil</a>
+    <a href="#À propos de moi" class="nav-link">À propos de moi</a>
+    <a href="#Mes qualités" class="nav-link">Mes qualités</a>
+    <a href="#hobbies" class="nav-link">Hobbies</a>
+    <a href="#projets" class="nav-link">Projets</a>
+    <a href="#contact" class="nav-link">Contact</a>
+    <div class="underline"></div>
+  </nav>
+
+  <a href="asset/CV_Akram_BOUZIDI.pdf" class="btn-cv" download>
+
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+
+    Télécharger CV
+  </a>
+
 </header>
 
 <!-- Hero -->
 
-<section class="flex container1000 gap100 align-center">
-    <div class="gap15">
+<section id="accueil" class="flex gap100 align-center ">
+
+    <!-- image de moi / hero -->
+
+<div class="w100 hero-img flex align-center ">
+
+    <div class="ml-150">
         <h1>Bonjour !</h1>
         <p>Moi c'est Akram,<br>je suis à la recherche <br> d'une alternance en dévellopement web.</p>
 
         <div class="mgt15 ">
-        <p>Retrouvez moi sur</p>
-            <i class="ph-fill ph-instagram-logo"></i>
-            <i class="ph-fill ph-linkedin-logo"></i>
-            <i class="ph-fill ph-facebook-logo"></i>
+            <p>Retrouvez moi sur</p>
+                <i class="ph-fill ph-instagram-logo"></i>
+                <i class="ph-fill ph-linkedin-logo"></i>
+                <i class="ph-fill ph-facebook-logo"></i>
         </div>
 
     </div>
-    <!-- image de moi / hero -->
-    <div class="w30 ">
-        <img src="asset/moi.png" alt="image de moi" class="w100">
-    </div>
+
+</div>
+    
 </section>
 
 <!-- MES PROJETS -->
 
-<section class="container1200 mgt128">
+<section id="projets" class="container1200 mgt128">
     <h2>Mes projets</h2>
 
     <!-- PROJETS N°1 & N°2-->
@@ -172,9 +192,10 @@
     
 </section>
 
+
 <!-- MES QUALITES -->
 
-<section class="mgt128 bg-accent">
+<section id="Mes qualités" class="mgt128 bg-accent">
     <h2 class="txt-center mgb50">Mes qualités</h2>
 
 <div class="flex gap100 ml150">
@@ -204,7 +225,8 @@
 </section>
 
 <!-- MES HOBBIES -->
-<section class="container1000 mgt128 mgb50">
+
+<section id="hobbies" class="container1000 mgt128 mgb50">
     
     <h2 class="txt-center mgb30 clr-white">MES PASSIONS & CENTRES D'INTÉRÊT</h2>
 
@@ -256,7 +278,7 @@
 <!-- MON PARCOURS -->
 
 </section>
-<section class="container1100 mgt100 mgb100">
+<section id="À propos de moi" class="container1100 mgt100 mgb100">
 
     <div class="txt-center mgb50">
         <h2 class="clr-white">MON PARCOURS</h2>
@@ -331,7 +353,7 @@
 </section>
 
 
-<footer class="bg-footer mgt128">
+<footer id="Contact" class="bg-footer mgt128">
     <div class="w50 flex align-center">
     <img src="asset/logo_akram-removebg-preview (1).png" alt="" class="w50">
    <div class="">
@@ -345,5 +367,6 @@
             <i class="ph-fill ph-facebook-logo logo-size"></i></a>
     </div>
 </footer>
+
 </body>
 </html>

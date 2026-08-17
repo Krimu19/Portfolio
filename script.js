@@ -82,6 +82,39 @@ if (timelineWrapper && timelineContainer && timelinePrevBtn && timelineNextBtn) 
 }
 
 
+const nav = document.querySelector('.nav');
+const links = document.querySelectorAll('.nav-link');
+const underline = document.querySelector('.underline');
+
+function updateUnderline(link) {
+  const rect = link.getBoundingClientRect();
+  const navRect = nav.getBoundingClientRect();
+
+  underline.style.width = `${rect.width}px`;
+  underline.style.left = `${rect.left - navRect.left}px`;
+}
+
+// Position initiale (sur Accueil)
+window.addEventListener('load', () => {
+  const active = document.querySelector('.nav-link.active');
+  if (active) updateUnderline(active);
+});
+
+// Au clic
+links.forEach(link => {
+  link.addEventListener('click', (e) => {
+    links.forEach(l => l.classList.remove('active'));
+    link.classList.add('active');
+    updateUnderline(link);
+  });
+});
+
+// Recalcul si on redimensionne la fenêtre
+window.addEventListener('resize', () => {
+  const active = document.querySelector('.nav-link.active');
+  if (active) updateUnderline(active);
+});
+
 
 
 
