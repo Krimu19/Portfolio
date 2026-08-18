@@ -1,3 +1,9 @@
+
 {
+    "quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
     "liveServer.settings.port": 5502
 }

@@ -1,0 +1,230 @@
+:root{
+  --bg: #14162b;
+  --coral: #ff6f5e;
+  --teal: #57d9d0;
+  --img-w: 2204;
+  --img-h: 464;
+  --src: url('qualites-base.jpg');
+}
+
+*{ box-sizing: border-box; }
+
+html, body{
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.wrap{
+  width: 100%;
+  padding: 40px 16px 60px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* the whole strip is built out of crops of the SAME base image,
+   placed side by side so together they recompose the original picture */
+.qualities{
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  max-width: 1400px;
+  margin: 0 auto;
+  height: 0; /* set by JS to keep aspect ratio */
+}
+
+.crop{
+  position: relative;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: var(--src);
+  overflow: hidden;
+  will-change: transform;
+}
+
+/* ---- 1. Dynamique : le coureur ---- */
+.crop.dynamique{ animation: runBob 0.6s ease-in-out infinite; transform-origin: 50% 90%; }
+@keyframes runBob{
+  0%, 100%{ transform: translateY(0) rotate(-0.6deg); }
+  50%{ transform: translateY(-5px) rotate(0.6deg); }
+}
+
+/* ---- 2. Passionné : le coeur qui bat ---- */
+.crop.passionne{ animation: heartBeat 1.15s ease-in-out infinite; transform-origin: 50% 55%; }
+@keyframes heartBeat{
+  0%, 100%{ transform: scale(1); }
+  15%{ transform: scale(1.045); }
+  30%{ transform: scale(0.985); }
+  45%{ transform: scale(1.03); }
+  60%{ transform: scale(1); }
+}
+
+/* ---- 3. Motivée : la fusée qui secoue puis décolle un peu ---- */
+.crop.motivee{ animation: rocketShake 2.8s ease-in-out infinite; transform-origin: 50% 85%; }
+@keyframes rocketShake{
+  0%, 55%{ transform: translate(0,0) rotate(0deg); }
+  58%{ transform: translate(-2px,0) rotate(-0.8deg); }
+  61%{ transform: translate(2px,0) rotate(0.8deg); }
+  64%{ transform: translate(-2px,-1px) rotate(-0.6deg); }
+  67%{ transform: translate(2px,0) rotate(0.6deg); }
+  72%{ transform: translate(0,-3px) rotate(0deg); }
+  78%{ transform: translate(0,0) rotate(0deg); }
+  100%{ transform: translate(0,0) rotate(0deg); }
+}
+
+/* ---- 4. À l'écoute : légère respiration + ondes ---- */
+.crop.ecoute{ animation: earPulse 2.4s ease-in-out infinite; transform-origin: 40% 50%; }
+@keyframes earPulse{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.015); }
+}
+
+/* ---- 5. Créative : la plume qui scintille ---- */
+.crop.creative{ animation: creativeFloat 2.6s ease-in-out infinite; transform-origin: 50% 60%; }
+@keyframes creativeFloat{
+  0%, 100%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(-4px) rotate(0.4deg); }
+}
+
+/* ---- 6. Adaptable : le caméléon qui change de teinte ---- */
+.crop.adaptable{
+  animation: chameleonShift 4s ease-in-out infinite, breathe 3s ease-in-out infinite;
+  transform-origin: 50% 55%;
+}
+@keyframes chameleonShift{
+  0%, 100%{ filter: hue-rotate(0deg) saturate(1); }
+  50%{ filter: hue-rotate(35deg) saturate(1.25); }
+}
+@keyframes breathe{
+  0%, 100%{ transform: scale(1); }
+  50%{ transform: scale(1.02); }
+}
+
+/* ---- 7. Autonome : l'écran qui pulse doucement ---- */
+.crop.autonome{ animation: idleBob 3.2s ease-in-out infinite; transform-origin: 50% 90%; }
+@keyframes idleBob{
+  0%, 100%{ transform: translateY(0); }
+  50%{ transform: translateY(-3px); }
+}
+
+/* ================= overlay effects ================= */
+
+.fx-layer{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* speed streaks for the runner */
+.speed-streak{
+  position: absolute;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--teal), var(--coral), transparent);
+  opacity: 0;
+  animation: streakFly 0.8s linear infinite;
+}
+@keyframes streakFly{
+  0%{ transform: translateX(40px); opacity: 0; }
+  15%{ opacity: .85; }
+  100%{ transform: translateX(-90px); opacity: 0; }
+}
+
+/* flame glow behind the heart */
+.flame-glow{
+  position: absolute;
+  left: 42%; top: 18%;
+  width: 26%; height: 30%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,190,120,0.55), transparent 70%);
+  filter: blur(4px);
+  animation: glowPulse 1.15s ease-in-out infinite;
+}
+@keyframes glowPulse{
+  0%, 100%{ opacity: 0.35; transform: scale(1); }
+  50%{ opacity: 0.75; transform: scale(1.15); }
+}
+
+/* rocket exhaust glow */
+.exhaust-glow{
+  position: absolute;
+  left: 4%; bottom: 6%;
+  width: 30%; height: 26%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,150,90,0.65), transparent 70%);
+  filter: blur(3px);
+  animation: exhaustPulse 0.18s linear infinite alternate;
+}
+@keyframes exhaustPulse{
+  from{ opacity: 0.5; transform: scale(0.9); }
+  to{ opacity: 0.9; transform: scale(1.15); }
+}
+
+/* listening sound-wave rings */
+.wave-ring{
+  position: absolute;
+  border: 2px solid var(--teal);
+  border-radius: 50%;
+  left: 62%; top: 46%;
+  transform: translate(-50%,-50%) scale(0.3);
+  opacity: 0;
+  animation: waveOut 2.4s ease-out infinite;
+}
+@keyframes waveOut{
+  0%{ transform: translate(-50%,-50%) scale(0.25); opacity: 0.75; }
+  70%{ opacity: .12; }
+  100%{ transform: translate(-50%,-50%) scale(1.7); opacity: 0; }
+}
+
+/* ink / pen glow for Créative */
+.ink-glow{
+  position: absolute;
+  left: 34%; top: 10%;
+  width: 34%; height: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255,255,255,0.5), transparent 70%);
+  filter: blur(5px);
+  animation: glowPulse 1.4s ease-in-out infinite;
+}
+
+/* twinkling sparkles spawned by JS around the pen */
+.sparkle{
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 6px 2px rgba(255,255,255,0.8);
+  opacity: 0;
+  animation: sparkleTwinkle 1s ease-out forwards;
+}
+@keyframes sparkleTwinkle{
+  0%{ transform: scale(0); opacity: 0; }
+  40%{ transform: scale(1); opacity: 1; }
+  100%{ transform: scale(0.2); opacity: 0; }
+}
+
+/* monitor screen glow for Autonome */
+.screen-glow{
+  position: absolute;
+  left: 22%; top: 28%;
+  width: 26%; height: 24%;
+  border-radius: 6px;
+  background: radial-gradient(ellipse, rgba(120,220,255,0.45), transparent 70%);
+  filter: blur(3px);
+  animation: screenPulse 2.2s ease-in-out infinite;
+}
+@keyframes screenPulse{
+  0%, 100%{ opacity: 0.4; }
+  50%{ opacity: 0.85; }
+}
+
+@media (max-width: 1000px){
+  .qualities{ flex-wrap: nowrap; overflow-x: auto; max-width: 100%; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation: none !important; }
+}
