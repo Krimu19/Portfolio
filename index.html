@@ -32,7 +32,7 @@
     <a href="#hobbies" class="nav-link">Hobbies</a>
     <a href="#projets" class="nav-link">Projets</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <div class="underline"></div>
+    <div class="underline-nav"></div>
   </nav>
 
   <a href="asset/CV_Akram_BOUZIDI.pdf" class="btn-cv" download>
@@ -57,16 +57,46 @@
 <div class="w100 hero-img flex align-center ">
 
     <div class="ml-150">
-        <h1>Bonjour !</h1>
-        <p>Moi c'est Akram,<br>je suis à la recherche <br> d'une alternance en dévellopement web.</p>
+  
+        <h1 class="mgb5">
+          Bonjour <span class="name">!</span><br>
+          Moi c'est <span class="name">Akram...</span>
+        </h1>
 
-        <div class="mgt15 ">
+        <div class="underline-hero mgb15"></div>
+
+        <p>je suis à la recherche <br> d'une alternance en dévellopement web.</p>
+
+         
+        <div class="mgt10">
             <p>Retrouvez moi sur</p>
-                <i class="ph-fill ph-instagram-logo"></i>
-                <i class="ph-fill ph-linkedin-logo"></i>
-                <i class="ph-fill ph-facebook-logo"></i>
-        </div>
 
+            <div class="mgt5">
+                  <a href="" class="txt-none mk">
+                    <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                      <circle cx="12" cy="12" r="4.5"/>
+                      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+                    </svg>
+                  </a>
+
+                  <a href="" class="txt-none ml-10">
+                      <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                      </svg>
+                  </a>              
+
+                  <a href="" class="txt-none ml-10">
+                      <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                      </svg>
+                  </a>
+            </div>  
+        </div>
+ 
+        
     </div>
 
 </div>
@@ -77,6 +107,7 @@
 
 <section class="projects-section " id="projets">
   <div class="projects-header">
+
     <div class="projects-label">
       <span>&lt;/&gt;</span> Tous mes projets
     </div>
@@ -89,6 +120,7 @@
       <span class="dot"></span>
       Auto-scrolling
     </button>
+
   </div>
 
   <div class="carousel-wrapper">
@@ -105,7 +137,27 @@
 
         <article class="project-card ">
 
+          <div class=" flex gap20 align-center">
+                <svg class="neon-icon ml100" style="color: #7df2ff;" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  
+                  <!-- La boussole en arrière-plan -->
+                  <circle cx="46" cy="18" r="14" stroke-dasharray="6 4" stroke-width="1.5" />
+                  <!-- Les points cardinaux de la boussole -->
+                  <path d="M46 0v4 M46 32v4 M64 18h-4 M28 18h-4" stroke-width="1.5" />
+                  <!-- L'aiguille de la boussole -->
+                  <path d="M46 18 l-5 5 l10 -10 z" fill="currentColor" stroke-width="1" />
+                  
+                  <!-- La chaîne de montagnes (premier plan) -->
+                  <path d="M4 58 L22 26 L36 44 L48 30 L62 58 Z" fill="rgba(125, 242, 255, 0.08)" />
+                  
+                  <!-- Les lignes de crête / ombres des montagnes -->
+                  <path d="M22 26 L26 58 M48 30 L46 58 M36 44 L32 52" stroke-width="1.5" />
+                </svg>
+
             <h3 class="project-card-title txt-center mgt15">MNTN</h3>
+          </div>
+
+            
 
             <div class="project-card-image mgt15">
 
@@ -140,8 +192,15 @@
         <!-- ===== CARD 2 ===== -->
 
         <article class="project-card">
-
+            <div class=" flex gap15 align-center">
+              <svg class="neon-icon ml100 mgt10" style="color: #ffb347;" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Colonne architecturale à gauche -->
+              <path d="M12 12 h16 M14 12 v40 M26 12 v40 M10 52 h20" stroke-width="2" />
+              <path d="M18 12 v40 M22 12 v40" stroke-width="1" stroke-dasharray="2 4" />
+            </svg>
             <h3 class="project-card-title txt-center mgt15">Clemence</h3>
+            </div>
+            
             
           <div class="project-card-image mgt15">
             <img src="asset/CLEMENCE.png" alt="Clemence Project">
@@ -175,8 +234,24 @@
         <!-- ===== CARD 3  ===== -->
 
         <article class="project-card">
+        <div class="flex gap20 align-center">
+              <svg class="neon-icon ml100 mgt10" style="color: #72ff47;" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <!-- Soleil et rayons -->
+                <circle cx="46" cy="18" r="8" stroke="#ffe600" stroke-width="2" />
+                <path d="M46 4 v2 M46 30 v2 M32 18 h2 M60 18 h2 M36 8 l2 2 M56 28 l2 2 M56 8 l-2 2 M36 28 l2 -2" stroke="#ffe600" stroke-width="1.5" />
+                
+                <!-- Tronc du palmier -->
+                <path d="M22 52 q 6 -16 -4 -32" stroke-width="2" />
+                <!-- Feuilles du palmier -->
+                <path d="M18 20 q -10 -4 -12 8 M18 20 q -4 -12 6 -14 M18 20 q 12 -6 16 4 M18 20 q 6 10 -4 14" stroke-width="1.5" fill="rgba(114, 255, 71, 0.1)" />
+                
+                <!-- Collines / Vagues au sol -->
+                <path d="M4 52 q 12 -8 24 0 t 24 0" stroke-width="2" />
+              </svg>
+              <h3 class="project-card-title txt-center mgt15">Tudo de Bom</h3>
+        </div>
 
-            <h3 class="project-card-title txt-center mgt15">Tudo de Bom</h3>
+            
             
           <div class="project-card-image mgt15">
             <img src="asset/tudo-de-bom.png" alt="Tudo de Bom">
@@ -207,7 +282,24 @@
 
         <article class="project-card">
 
-        <h3 class="project-card-title txt-center mgt15">Interno</h3>
+          <div class="flex gap20 align-center">
+            <svg class="neon-icon ml100 mgt5" style="color: #ff9b71;" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Grand Canapé -->
+              <path d="M8 46 h36 v8 h-36 z" stroke-width="2" />
+              <path d="M10 34 h32 v12 h-32 z" stroke-width="1.5" />
+              <!-- Coussins -->
+              <path d="M14 34 v-4 h8 v4 M28 34 v-4 h8 v4" stroke-width="1.5" />
+              
+              <!-- Plante d'intérieur à droite -->
+              <path d="M52 54 v-12" stroke-width="2" />
+              <path d="M48 54 h8 v-6 h-8 z" stroke-width="1.5" />
+              <!-- Feuilles de la plante -->
+              <path d="M52 42 q -8 -6 0 -12 q 8 6 0 12 M52 38 q -10 -2 -4 -10 q 10 2 4 10" stroke-width="1.5" />
+            </svg>
+            <h3 class="project-card-title txt-center mgt15">Interno</h3>
+          </div>
+
+        
 
           <div class="project-card-image mgt15">
             <img src="asset/interno.png" alt="Interno Project">
@@ -239,7 +331,20 @@
 
         <article class="project-card">
 
+          <div class="flex gap15 align-center">
+            <svg class="neon-icon ml100 mgt10" style="color: #ffffff;" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Structure externe (Losange / Hexagone) -->
+              <path d="M32 4 L56 20 L56 44 L32 60 L8 44 L8 20 Z" stroke-width="1.5" fill="rgba(255, 255, 255, 0.05)" />
+              
+              <!-- Lettre M géométrique 3D au centre -->
+              <path d="M16 44 v-20 l16 16 l16 -16 v20" stroke-width="2.5" />
+              <!-- Lignes de fuite pour la profondeur -->
+              <path d="M8 20 l8 4 M56 20 l-8 4 M32 4 v12 M32 60 v-16" stroke-width="1" stroke-dasharray="2 3" />
+            </svg>
             <h3 class="project-card-title txt-center mgt15">Monochrome</h3>
+          </div>
+
+            
 
           <div class="project-card-image mgt15">
             <img src="asset/Monochrome1.png" alt="Monochrome Project">
@@ -270,7 +375,32 @@
 
         <article class="project-card">
 
-        <h3 class="project-card-title txt-center mgt15 ">Analytics Dashboard</h3>
+          <div class="flex gap20 align-center">
+            <svg class="neon-icon ml100 mgt10" style="color: #b026ff;" viewBox="0 0 64 64" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              
+              <!-- Silhouette du téléphone mobile (Application Figma) -->
+              <rect x="20" y="6" width="24" height="42" rx="4" stroke-width="1.5" fill="rgba(176, 38, 255, 0.05)" />
+              
+              <!-- Écran : Haut-parleur et tracé d'activité cardiaque -->
+              <path d="M 28 10 h 8" stroke-width="1.5" />
+              <path d="M 24 22 l 3 -4 l 5 8 l 3 -4 l 3 2" stroke-width="1.5" />
+              
+              <!-- Écran : Représentation abstraite des blocs UI de ton app -->
+              <path d="M 24 30 h 16 M 24 34 h 10" stroke-width="1" stroke-dasharray="2 3" />
+
+              <!-- Haltère de musculation (Sport) au premier plan -->
+              <!-- Barre de l'haltère -->
+              <path d="M 6 46 h 52" stroke-width="2.5" />
+              <!-- Poids côté gauche -->
+              <path d="M 16 36 v 20 M 10 39 v 14" stroke-width="2" />
+              <!-- Poids côté droit -->
+              <path d="M 48 36 v 20 M 54 39 v 14" stroke-width="2" />
+              
+            </svg>
+            <h3 class="project-card-title txt-center mgt15 ">AntoRun</h3>
+          </div>
+
+        
 
           <div class="project-card-image mgt15">
             <img src="asset/605shots_so.png" alt="Dashboard Project">
@@ -316,14 +446,11 @@
 
 </section>
 
-
-
 <!-- MES QUALITES -->
 
-<!-- ========== SECTION QUALITÉS ========== -->
 <section id="Mes qualités" class="qualities-section  mgb100" >
   <div class="container1200">
-    <h2 class="qualities-title txt-center">Mes qualités</h2>
+    <h2 class="clr-white mgb50 txt-center">Mes qualités</h2>
 
     <div class="qualities-grid flex">
       
@@ -332,7 +459,7 @@
         <div class="quality-card-img">
           <img src="asset/run.png" alt="Dynamique">
         </div>
-        <div class="quality-card-label">Dynamique</div>
+        <h3 class="quality-card-label">Dynamique</h3>
       </article>
 
       <!-- 2. Passionné -->
@@ -340,7 +467,7 @@
         <div class="quality-card-img">
           <img src="asset/heart.png" alt="Passionné">
         </div>
-        <div class="quality-card-label">Passionné</div>
+        <h3 class="quality-card-label">Passionné</h3>
       </article>
 
       <!-- 3. Motivée -->
@@ -348,7 +475,7 @@
         <div class="quality-card-img">
           <img src="asset/fusée.png" alt="Motivée">
         </div>
-        <div class="quality-card-label">Motivée</div>
+        <h3 class="quality-card-label">Motivée</h3>
       </article>
 
       <!-- 4. À l'écoute -->
@@ -356,7 +483,7 @@
         <div class="quality-card-img">
           <img src="asset/ecoute (2).png" alt="À l'écoute">
         </div>
-        <div class="quality-card-label">À l'écoute</div>
+        <h3 class="quality-card-label">À l'écoute</h3>
       </article>
 
       <!-- 5. Créative -->
@@ -364,7 +491,7 @@
         <div class="quality-card-img">
           <img src="asset/pen.png" alt="Créative">
         </div>
-        <div class="quality-card-label">Créative</div>
+        <h3 class="quality-card-label">Créative</h3>
       </article>
 
       <!-- 6. Adaptable -->
@@ -372,7 +499,7 @@
         <div class="quality-card-img">
           <img src="asset/camelon.png" alt="Adaptable">
         </div>
-        <div class="quality-card-label">Adaptable</div>
+        <h3 class="quality-card-label">Adaptable</h3>
       </article>
 
       <!-- 7. Autonome -->
@@ -380,15 +507,12 @@
         <div class="quality-card-img">
           <img src="asset/work.png" alt="Autonome">
         </div>
-        <div class="quality-card-label">Autonome</div>
+        <h3 class="quality-card-label">Autonome</h3>
       </article>
 
     </div>
   </div>
 </section>
-
-
-
 
 <!-- MES HOBBIES -->
 
@@ -444,9 +568,9 @@
 <!-- MON PARCOURS -->
 <section id="À propos de moi"  class="timeline-section" id="parcours">
   <div class="timeline-header">
-    <div class="timeline-label">Mon Parcours</div>
-    <h2 class="timeline-title">Mon évolution</h2>
-    <p class="timeline-subtitle">De mes débuts jusqu’à aujourd’hui</p>
+    <div class="timeline-label">Mon évolution</div>
+    <h2 class="clr-white mgb12">Mon Parcours</h2>
+    <p class="timeline-subtitle">De mes débuts jusqu'à aujourd'hui</p>
   </div>
 
   <div class="timeline-carousel-wrapper">
@@ -476,33 +600,65 @@
   <div class="timeline-dots" id="timelineDots"></div>
 </section>
 
+<footer id="contact"  class="bg-footer">
 
+    <div class="flex gap150 align-center">
 
-<footer id="contact"  class="bg-footer mgt128">
+              <h4 class="logo mgb15">Akram<span> Bouzidi</span></h4>
 
-    <div class="w50 flex  gap30 align-center">
+          <!-- SERVICES PROPOSER -->
 
-      <div class="logo">Akram<span> Bouzidi</span></div>
-
-            <div class="">
-              <p class="">Disponible pour des projets freelance</p>
-              <h3>CONTACTER - MOI</h3>
+            <div class="flex gap100 just-center">
+                <div class="">
               
-              <p class="">akram.b4219@gmail.com</p>
-              <p class="">+33 7 68 04 83 26</p>
-              
-              <a href="https://www.pcroot.com" class="txt-none flex align-center gap5" target="_blank">
+                          <h3 class="mgb10">CONTACTER - MOI</h3>
+                          <p class="">akram.b4219@gmail.com</p>
+                          <a href="" class=" clr-white">+33 7 68 04 83 26</a>
+                          <p class="mgt5 mgb10">Saint-etienne, France</p>
+                          
+                        
+                        <a href="" class="txt-none mk">
+                          <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                            <circle cx="12" cy="12" r="4.5"/>
+                            <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+                          </svg>
+                        </a>
+
+                        <a href="" class="txt-none ml-10">
+                            <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                              <rect x="2" y="9" width="4" height="12"/>
+                              <circle cx="4" cy="4" r="2"/>
+                            </svg>
+                        </a>              
+
+                        <a href="" class="txt-none ml-10">
+                            <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                            </svg>
+                        </a>
+          </div>
+
+              <div>
+                  <h3 class="mgb10">Disponible pour des projets freelance</h3>
+                  <p>Si vous voulais crée une page web pour votre utilistation personnele <br>ou professionel n'essiter pas a me contacter c'est avec plaisir que <br>je vous repondrais dans les plus bref delais.</p>
+              </div>
+                  <div>
+                      <h3 class="mgb10">Réparation informatique</h3>
+                      <p class="mgb10">Je fait aussi la pratique de reparation de telephone, tablette, oridnateur, et certaine console de jeux.<br>
+                        si il vous vient un jour ou vous avez besoin d'informaticien car votre chat a manger votre ecran <br>n'essiter pas a me contacter et visiter nortre site web !!
+                      </p>
+                      <a href="https://www.pcroot.com" class="txt-none flex align-center gap5" target="_blank">
                       <i class="ph-fill ph-link logo-size"></i>pcroot.com</a>
-              
-              <p class="flex-end">Saint-etienne, France</p>
-              <a href="" class="txt-none">
-                      <i class="ph-fill ph-instagram-logo logo-size"></i></a>
-              <a href="" class="txt-none">
-                      <i class="ph-fill ph-linkedin-logo logo-size"></i></a>
-              <a href="" class="txt-none">
-                      <i class="ph-fill ph-facebook-logo logo-size"></i></a>
+                  </div>
+
             </div>
-    </div>
+
+
+
+   </div> 
+   <p class="txt-center mgt30">© 2026 Akram Bouzidi. Tous droits réservés.</p>
 </footer>
 
 </body>
