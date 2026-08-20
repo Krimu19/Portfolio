@@ -339,6 +339,9 @@ p {
 .mgt30{
     margin-top: 30px;
 }
+.mgt40{
+    margin-top: 40px;
+}
 
 .mgt15{
     margin-top: 15px;
@@ -362,6 +365,9 @@ margin-bottom: 50px;
 
 .mgb30{
     margin-bottom: 30px;
+}
+.mgb20{
+    margin-bottom: 25px;
 }
 
 .mgb15{
