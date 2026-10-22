@@ -21,92 +21,253 @@
 </head>
 <body>
 
-<header class="header">
-
-  <div class="logo">Akram<span> Bouzidi</span></div>
-
-  <nav class="nav">
-    <a href="#accueil" class="nav-link active">Accueil</a>
-    <a href="#À propos de moi" class="nav-link">À propos de moi</a>
-    <a href="#projets" class="nav-link">Projets</a>
-    <a href="#Mes qualités" class="nav-link">Mes qualités</a>
-    <a href="#hobbies" class="nav-link">Hobbies</a>
-    
-    <a href="#contact" class="nav-link">Contact</a>
-    <div class="underline-nav"></div>
-  </nav>
-
-  <a href="asset/CV_Akram_BOUZIDI.pdf" class="btn-cv" download>
-
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-      <polyline points="7 10 12 15 17 10"/>
-      <line x1="12" y1="15" x2="12" y2="3"/>
-    </svg>
-
-    Télécharger CV
-  </a>
-
+<!-- Decoration arriere plan codage -->
+<div class="bg" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+    <span class="orb orb-4"></span>
+    <span class="dots"></span>
+    <pre class="ghost-code">const projets = [];
+for (const p of formation) {
+  projets.push(build(p));
+}
+export default function Portfolio() {
+  return render(projets);
+}</pre>
+</div>
+ 
+<!-- HEADER -->
+<header class="site-header">
+    <a href="#accueil" class="logo">
+      <span class="logo-mark">AB</span>
+      <span class="logo-text">Akram <span>Bouzidi</span></span>
+    </a>
+ 
+    <nav class="nav" id="menu" aria-label="Navigation principale">
+      <a href="#accueil" class="active">Accueil</a>
+      <a href="#a-propos">À propos</a>
+      <a href="#projets">Projets</a>
+      <a href="#qualites">Qualités</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#contact">Contact</a>
+    </nav>
+ 
+    <a href="assets/CV-Akram-Bouzidi.pdf" class="btn btn-primary btn-cv" download>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      <span>Télécharger CV</span>
+    </a>
+ 
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu">
+      <span></span><span></span><span></span>
+    </button>
 </header>
 
-<!-- Hero -->
+<!-- HERO -->
+<section id="accueil" class="hero">
 
-<section id="accueil" class="flex gap100 align-center ">
+<!-- Ambient Lights -->
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
 
-    <!-- image de moi / hero -->
+<!-- Interactive 3D Canvas -->
+<div class="scene-container" id="sceneContainer">
+  <div class="stage-3d" id="stage3d">
 
-<div class="w100 hero-img flex align-center ">
-
-    <div class="ml-150">
-  
-        <h1 class="mgb5">
-          Bonjour <span class="name">!</span><br>
-          Moi c'est <span class="name">Akram...</span>
-        </h1>
-
-        <div class="underline-hero mgb15"></div>
-
-        <p>je suis à la recherche <br> d'une alternance en dévellopement web.</p>
-
-         
-        <div class="mgt10">
-            <p>Retrouvez moi sur</p>
-
-            <div class="mgt5">
-                  <a href="" class="txt-none mk">
-                    <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-                      <circle cx="12" cy="12" r="4.5"/>
-                      <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
-                    </svg>
-                  </a>
-
-                  <a href="" class="txt-none ml-10">
-                      <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                        <rect x="2" y="9" width="4" height="12"/>
-                        <circle cx="4" cy="4" r="2"/>
-                      </svg>
-                  </a>              
-
-                  <a href="" class="txt-none ml-10">
-                      <svg class="logo-size" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-                      </svg>
-                  </a>
-            </div>  
-        </div>
- 
-        
+    <!-- 1. GITHUB -->
+    <div class="glass-card card-github">
+      <svg class="icon-svg" width="120" height="120" viewBox="0 0 100 100" fill="none">
+        <defs>
+          <linearGradient id="ghGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#e9d5ff"/>
+            <stop offset="50%" stop-color="#c084fc"/>
+            <stop offset="100%" stop-color="#a855f7"/>
+          </linearGradient>
+        </defs>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M50 8C26.8 8 8 26.8 8 50c0 18.55 12.02 34.28 28.7 39.85 2.1.39 2.86-.91 2.86-2.02 0-1-.04-4.3-.06-7.8-11.67 2.54-14.13-4.95-14.13-4.95-1.91-4.85-4.66-6.14-4.66-6.14-3.81-2.6.29-2.55.29-2.55 4.21.3 6.43 4.32 6.43 4.32 3.74 6.41 9.82 4.56 12.21 3.49.38-2.71 1.46-4.56 2.66-5.61-9.32-1.06-19.12-4.66-19.12-20.75 0-4.58 1.64-8.33 4.33-11.27-.43-1.07-1.88-5.35.41-11.15 0 0 3.53-1.13 11.56 4.31 3.35-.93 6.95-1.4 10.52-1.41 3.57.01 7.17.48 10.52 1.41 8.02-5.44 11.54-4.31 11.54-4.31 2.31 5.8.86 10.08.42 11.15 2.7 2.94 4.32 6.69 4.32 11.27 0 16.13-9.82 19.67-19.17 20.71 1.51 1.3 2.85 3.86 2.85 7.78 0 5.62-.05 10.15-.05 11.53 0 1.12.75 2.43 2.88 2.02C79.99 84.26 92 68.54 92 50 92 26.8 73.2 8 50 8z" fill="url(#ghGrad)"/>
+      </svg>
     </div>
 
+    <!-- 2. REACT (hexagone) -->
+    <div class="glass-card card-react">
+      <svg class="icon-svg" width="52" height="52" viewBox="0 0 100 100" fill="none">
+        <ellipse cx="50" cy="50" rx="38" ry="15" stroke="#a78bfa" stroke-width="5" fill="none"/>
+        <ellipse cx="50" cy="50" rx="38" ry="15" stroke="#a78bfa" stroke-width="5" fill="none" transform="rotate(60 50 50)"/>
+        <ellipse cx="50" cy="50" rx="38" ry="15" stroke="#a78bfa" stroke-width="5" fill="none" transform="rotate(120 50 50)"/>
+        <circle cx="50" cy="50" r="7.5" fill="#a78bfa"/>
+      </svg>
+    </div>
+
+    <!-- 3. JAVASCRIPT -->
+    <div class="glass-card card-js">
+      <svg class="icon-svg" width="100" height="130" viewBox="0 0 100 130" fill="none">
+        <path d="M12 8 L88 8 L80 108 L50 122 L20 108 Z" fill="rgba(168,85,247,0.18)" stroke="#c084fc" stroke-width="3.5"/>
+        <path d="M50 14 L82 14 L75 100 L50 112 Z" fill="rgba(192,132,252,0.22)"/>
+        <text x="50" y="38" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="18" fill="#e9d5ff" letter-spacing="1">JS</text>
+        <text x="50" y="88" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="42" fill="#ffffff">JS</text>
+      </svg>
+    </div>
+
+    <!-- 4. CSS3 -->
+    <div class="glass-card card-css">
+      <svg class="icon-svg" width="115" height="145" viewBox="0 0 100 130" fill="none">
+        <defs>
+          <linearGradient id="cssGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38bdf8"/>
+            <stop offset="100%" stop-color="#1d4ed8"/>
+          </linearGradient>
+        </defs>
+        <text x="50" y="22" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="16" fill="#38bdf8" letter-spacing="1.5">CSS</text>
+        <path d="M14 28 L86 28 L78 108 L50 120 L22 108 Z" fill="url(#cssGrad)"/>
+        <path d="M50 34 L80 34 L73 102 L50 112 Z" fill="#2563eb"/>
+        <path d="M34 46 H66 L64 58 H48 L49 68 H63 L61 86 L50 90 L39 86 L38 78 H48 L49 82 L50 83 L52 82 L53 76 H36 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+
+<!-- 5. HTML5 -->
+    <div class="glass-card card-html">
+      <svg class="icon-svg" width="125" height="155" viewBox="0 0 100 130" fill="none">
+        <defs>
+          <linearGradient id="htmlLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#f97316"/>
+            <stop offset="100%" stop-color="#ea580c"/>
+          </linearGradient>
+          <linearGradient id="htmlRight" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#fb923c"/>
+            <stop offset="100%" stop-color="#f97316"/>
+          </linearGradient>
+        </defs>
+        <text x="50" y="20" text-anchor="middle" font-family="'Plus Jakarta Sans',sans-serif" font-weight="800" font-size="16" fill="#ffffff" letter-spacing="1.5">HTML</text>
+        <path d="M14 26 L86 26 L78 108 L50 120 L22 108 Z" fill="url(#htmlLeft)"/>
+        <path d="M50 32 L80 32 L73 102 L50 112 Z" fill="url(#htmlRight)"/>
+        <path d="M34 44 H66 L64 56 H38 L40 66 H63 L61 86 L50 90 L39 86 L38 78 H48 L49 82 L50 83 L52 82 L53 76 H36 Z" fill="#ffffff"/>
+      </svg>
+    </div>
+
+    <!-- 6. BITWARDEN -->
+    <div class="glass-card card-bitwarden">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;margin-top:4px;">
+        <svg class="icon-svg" width="46" height="46" viewBox="0 0 100 100" fill="none">
+          <path d="M50 8 L12 24 V52 C12 74 28 92 50 98 C72 92 88 74 88 52 V24 L50 8 Z" fill="#175DDC"/>
+          <path d="M50 18 L30 28 V52 C30 68 40 82 50 88 V18 Z" fill="#ffffff"/>
+        </svg>
+        <span style="font-size:11px;font-weight:700;color:#60a5fa;letter-spacing:0.4px;">bitwarden</span>
+      </div>
+    </div>
+
+  </div>
 </div>
-    
+
+  <div class="hero-text">
+        <p class="status">
+          <span class="status-dot"></span>
+          À la recherche d'une alternance
+        </p>
+        <p class="hello">Bonjour ! Moi c'est</p>
+        <h1 class="name">Akram</h1>
+        <p class="role">Développeur web <span class="mono">&lt;/&gt;</span></p>
+        <p class="intro">
+          Je transforme mes projets de formation en expériences web soignées.
+          Voici ce que j'ai construit, et qui je suis derrière le code.
+        </p>
+ 
+        <div class="actions">
+          <a href="#projets" class="btn btn-primary btn-lg">
+            Voir mes projets
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#contact" class="btn btn-glass btn-lg">Me contacter</a>
+ 
+          <span class="divider" aria-hidden="true"></span>
+ 
+          <ul class="socials">
+            <li>
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.8"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+  </div>
+ 
+<div class="hero-visual">
+        <span class="glow" aria-hidden="true"></span>
+        <div class="arch">
+          <img src="assets/akram.png" alt="Portrait d'Akram Bouzidi">
+        </div>
+ 
+        <div class="card card-code" aria-hidden="true">
+          <div class="win-dots"><span></span><span></span><span></span></div>
+          <pre><span class="k">const</span> akram = <span class="v">dev</span>;
+akram.<span class="f">cherche</span>(
+  <span class="s">"alternance"</span>
+);</pre>
+        </div>
+ 
+        <div class="card card-stack">
+          <p class="card-label">Mon socle</p>
+          <ul class="chips">
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+          </ul>
+        </div>
+  </div>
+ 
+<!-- Tuiles : la structure du portfolio -->
+  <ul class="tiles">
+        <li>
+          <a href="#projets" class="tile">
+            <span class="tile-icon i1">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </span>
+            <span class="tile-text">
+              <strong>Mes projets</strong>
+              <small>Ce que j'ai construit en formation</small>
+            </span>
+            <svg class="tile-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#qualites" class="tile">
+            <span class="tile-icon i2">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </span>
+            <span class="tile-text">
+              <strong>Mes qualités</strong>
+              <small>Ce qui me définit au travail</small>
+            </span>
+            <svg class="tile-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </li>
+        <li>
+          <a href="#hobbies" class="tile">
+            <span class="tile-icon i3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            </span>
+            <span class="tile-text">
+              <strong>Hobbies</strong>
+              <small>Ce que j'aime hors du code</small>
+            </span>
+            <svg class="tile-arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </li>
+  </ul>
+  
 </section>
 
 <!-- MES PROJETS -->
-
-<section class="projects-section " id="projets">
+<section id="projets" class="projects-section " >
   <div class="projects-header">
 
     <div class="projects-label">
@@ -448,7 +609,6 @@
 </section>
 
 <!-- MES QUALITES -->
-
 <section id="Mes qualités" class="qualities-section  mgb100" >
   <div class="container1200">
     <h2 class="clr-white mgb50 txt-center">Mes qualités</h2>
@@ -516,7 +676,6 @@
 </section>
 
 <!-- MES HOBBIES -->
-
 <section id="hobbies"  class="container1200 mgt128 mgb50 ">
     
     <h2 class="txt-center mgb30 clr-white">MES PASSIONS & CENTRES D'INTÉRÊT</h2>

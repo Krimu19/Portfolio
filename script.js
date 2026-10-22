@@ -5,10 +5,11 @@ AOS.init();
 ================================== */
 
 const nav = document.querySelector('.nav');
-const links = document.querySelectorAll('.nav-link');
-const underline = document.querySelector('.underline-nav');
+const navLinks = document.querySelectorAll('.nav a');
+const underline = document.querySelector('.underline-nav'); // S'assure que cet élément existe dans votre HTML/CSS
 
 function updateUnderline(link) {
+  if (!underline) return;
   const linkRect = link.getBoundingClientRect();
   const navRect = nav.getBoundingClientRect();
 
@@ -17,34 +18,27 @@ function updateUnderline(link) {
 }
 
 // Au chargement de la page → place la ligne sous le lien actif
-const activeLink = document.querySelector('.nav-link.active');
+const activeLink = document.querySelector('.nav a.active');
 if (activeLink) {
   updateUnderline(activeLink);
 }
 
 // Quand on clique sur un lien
-links.forEach(link => {
+navLinks.forEach(link => {
   link.addEventListener('click', (e) => {
-    // Enlève la classe active de tous les liens
-    links.forEach(l => l.classList.remove('active'));
-    
-    // Ajoute la classe active au lien cliqué
+    navLinks.forEach(l => l.classList.remove('active'));
     link.classList.add('active');
-    
-    // Déplace la ligne
     updateUnderline(link);
   });
 });
 
 // Bonus : si la fenêtre est redimensionnée, on recalcule la position
 window.addEventListener('resize', () => {
-  const currentActive = document.querySelector('.nav-link.active');
+  const currentActive = document.querySelector('.nav a.active');
   if (currentActive) {
     updateUnderline(currentActive);
   }
 });
-
-
 
 
 /* ===============================
@@ -55,9 +49,9 @@ const timelineData = [
   {
     year: "2020",
     title: "Stage de découverte informatique",
-    description: "j'ai pus realiser un stage en informatique",
-    tags: ["virtual box", "Peripheriques", "Réseaux", "Camera"],
-icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    description: "J'ai pu réaliser un stage en informatique",
+    tags: ["VirtualBox", "Périphériques", "Réseaux", "Caméra"],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
          <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
          <circle cx="9" cy="7" r="4"/>
          <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
@@ -70,7 +64,7 @@ icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
     year: "2021-24",
     title: "Baccalauréat Scientifique STI2D",
     description: "Obtention du bac, spécialité Mathématiques & Physique",
-    tags: ["Mathématiques", "Physique", "Dev durable", "Programtion"],
+    tags: ["Mathématiques", "Physique", "Dev durable", "Programmation"],
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
              <path d="M6 12v5c3 3 9 3 12 0v-5"/>
@@ -79,8 +73,8 @@ icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
   {
     year: "2024-25",
     title: "Assistance informatique et logistique",
-    description: "suite a ma sortie de bac j'ai eu la chance de travailer chez pc root, pendant la fac",
-    tags: ["RG-45", "Systéme & Réseaux", "Dépannage","Systeme camera","Réparation & Démontage"],
+    description: "Suite à ma sortie de bac j'ai eu la chance de travailler chez PC Root, pendant la fac",
+    tags: ["RJ-45", "Système & Réseaux", "Dépannage", "Système caméra", "Réparation & Démontage"],
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
          <rect x="2" y="7" width="20" height="14" rx="2"/>
          <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
@@ -92,8 +86,8 @@ icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
   {
     year: "2025",
     title: "Licence L1 - LLCER",
-    description: "licence d'une durée de 2 ans suite a une descision de retourner en informatique, avec sortie de niveau c1",
-    tags: ["Anglais", "Informatique Anglais", "Gramaire"],
+    description: "Licence d'une durée de 2 ans suite à une décision de retourner en informatique, avec sortie de niveau C1",
+    tags: ["Anglais", "Informatique Anglais", "Grammaire"],
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
          <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
          <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
@@ -104,9 +98,9 @@ icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
   {
     year: "2026",
     title: "Formation Développeur web",
-    description: "Obtention de certificat de jeune developpeur web front-end et UI/UX designer",
-    tags: ["HTML5", "CSS3", "javascript","Figma","Github","Vue.js" ,"workflow"],
-        icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+    description: "Obtention de certificat de jeune développeur web front-end et UI/UX designer",
+    tags: ["HTML5", "CSS3", "JavaScript", "Figma", "GitHub", "Vue.js", "Workflow"],
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
              <polyline points="16 18 22 12 16 6"/>
              <polyline points="8 6 2 12 8 18"/>
            </svg>`
@@ -114,8 +108,8 @@ icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="
   {
     year: "2024",
     title: "Aujourd'hui",
-    description: "A la recherche d'un alternance pour un BTS SIO option SISR",
-    tags: ["Systéme", "Réseaux", "Cloud"],
+    description: "À la recherche d'une alternance pour un BTS SIO option SISR",
+    tags: ["Système", "Réseaux", "Cloud"],
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
              <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/>
              <path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/>
@@ -134,8 +128,6 @@ let timelineIndex = 0;
 const timelineCardWidth = 368; // 340px + 28px gap
 
 if (timelineTrack && timelineDotsContainer) {
-
-  // Génération des slides avec alternance
   timelineData.forEach((item, index) => {
     const slide = document.createElement('div');
     const positionClass = index % 2 === 0 ? 'top' : 'bottom';
@@ -163,7 +155,6 @@ if (timelineTrack && timelineDotsContainer) {
     
     timelineTrack.appendChild(slide);
 
-    // Dot navigation en bas
     const dot = document.createElement('button');
     dot.className = 'timeline-dot';
     if (index === 0) dot.classList.add('active');
@@ -202,7 +193,6 @@ if (timelineTrack && timelineDotsContainer) {
          CARROUSEL PROJECTS  
 ================================== */
 
-
 const track = document.getElementById('carouselTrack');
 const cards = document.querySelectorAll('.project-card');
 const prevBtn = document.getElementById('prevBtn');
@@ -215,20 +205,22 @@ let autoScroll = true;
 let autoScrollInterval = null;
 const cardWidth = 444; // 420px + 24px gap
 
-// Créer les dots
-cards.forEach((_, index) => {
-  const dot = document.createElement('button');
-  dot.classList.add('carousel-dot');
-  if (index === 0) dot.classList.add('active');
-  dot.addEventListener('click', () => goToSlide(index));
-  dotsContainer.appendChild(dot);
-});
+if (dotsContainer) {
+  cards.forEach((_, index) => {
+    const dot = document.createElement('button');
+    dot.classList.add('carousel-dot');
+    if (index === 0) dot.classList.add('active');
+    dot.addEventListener('click', () => goToSlide(index));
+    dotsContainer.appendChild(dot);
+  });
+}
 
 const dots = document.querySelectorAll('.carousel-dot');
 
 function updateCarousel() {
-  track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
-
+  if (track) {
+    track.style.transform = `translateX(-${currentIndex * cardWidth}px)`;
+  }
   dots.forEach((dot, index) => {
     dot.classList.toggle('active', index === currentIndex);
   });
@@ -241,15 +233,19 @@ function goToSlide(index) {
   updateCarousel();
 }
 
-prevBtn.addEventListener('click', () => {
-  goToSlide(currentIndex - 1);
-  resetAutoScroll();
-});
+if (prevBtn) {
+  prevBtn.addEventListener('click', () => {
+    goToSlide(currentIndex - 1);
+    resetAutoScroll();
+  });
+}
 
-nextBtn.addEventListener('click', () => {
-  goToSlide(currentIndex + 1);
-  resetAutoScroll();
-});
+if (nextBtn) {
+  nextBtn.addEventListener('click', () => {
+    goToSlide(currentIndex + 1);
+    resetAutoScroll();
+  });
+}
 
 // Auto-scroll
 function startAutoScroll() {
@@ -269,24 +265,140 @@ function resetAutoScroll() {
   }
 }
 
-toggleBtn.addEventListener('click', () => {
-  autoScroll = !autoScroll;
-  toggleBtn.classList.toggle('paused', !autoScroll);
+if (track) {
+  track.addEventListener('mouseenter', stopAutoScroll);
+  track.addEventListener('mouseleave', () => {
+    if (autoScroll) startAutoScroll();
+  });
+}
 
-  if (autoScroll) {
-    startAutoScroll();
-  } else {
-    stopAutoScroll();
-  }
-});
+if (toggleBtn) {
+  toggleBtn.addEventListener('click', () => {
+    autoScroll = !autoScroll;
+    toggleBtn.classList.toggle('paused', !autoScroll);
 
-// Pause au survol
-track.addEventListener('mouseenter', stopAutoScroll);
-track.addEventListener('mouseleave', () => {
-  if (autoScroll) startAutoScroll();
-});
+    if (autoScroll) {
+      startAutoScroll();
+    } else {
+      stopAutoScroll();
+    }
+  });
+}
 
 // Démarrer
 startAutoScroll();
 updateCarousel();
 
+
+/* ===============================
+         MENU BURGER & OBSERVER  
+================================== */
+
+const burger = document.getElementById('burger');
+const menu = document.getElementById('menu');
+
+function setMenu(open) {
+  if (!menu || !burger) return;
+  menu.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', String(open));
+  burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+}
+
+if (burger && menu) {
+  burger.addEventListener('click', () => {
+    setMenu(!menu.classList.contains('open'));
+  });
+
+  // Ferme le menu après un clic sur un lien ou avec Échap
+  const menuLinks = menu.querySelectorAll('a');
+  
+  menuLinks.forEach((link) => {
+    link.addEventListener('click', () => setMenu(false));
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') setMenu(false);
+  });
+
+  // Lien actif selon la section visible
+  const sections = [...menuLinks]
+    .map((a) => document.querySelector(a.getAttribute('href')))
+    .filter(Boolean);
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          menuLinks.forEach((a) =>
+            a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id)
+          );
+        }
+      });
+    },
+    { rootMargin: '-40% 0px -55% 0px' }
+  );
+  
+  sections.forEach((s) => observer.observe(s));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+const container = document.getElementById('sceneContainer');
+const stage = document.getElementById('stage3d');
+
+let mouseX = 0, mouseY = 0;
+let currentX = 0, currentY = 0;
+
+window.addEventListener('mousemove', (e) => {
+  const rect = container.getBoundingClientRect();
+  const cx = rect.left + rect.width / 2;
+  const cy = rect.top + rect.height / 2;
+  mouseX = (e.clientX - cx) / (rect.width / 2);
+  mouseY = (e.clientY - cy) / (rect.height / 2);
+});
+
+function animateParallax() {
+  currentX += (mouseX - currentX) * 0.07;
+  currentY += (mouseY - currentY) * 0.07;
+  const rotY = currentX * 16;
+  const rotX = -currentY * 16;
+  stage.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+  requestAnimationFrame(animateParallax);
+}
+animateParallax();
