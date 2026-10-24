@@ -65,8 +65,16 @@ export default function Portfolio() {
 
 <!-- HERO -->
 <section id="accueil" class="hero">
+
+<!-- waves bg -->
+<div class="spline-container">
+  <spline-viewer url="https://prod.spline.design/sx7Bzf8bZXcEVbjM/scene.splinecode"></spline-viewer>
+  
+</div>
+<!-- Le script de Spline -->
 <script type="module" src="https://cdn.spline.design/@splinetool/viewer@2.0.106/build/spline-viewer.js"></script>
-<spline-viewer url="https://prod.spline.design/sx7Bzf8bZXcEVbjM/scene.splinecode"></spline-viewer>
+
+<!-- Texte de Presentation de moi -->
   <div class="hero-text">
         <p class="status">
           <span class="status-dot"></span>
@@ -108,13 +116,47 @@ export default function Portfolio() {
           </ul>
         </div>
   </div>
- 
+
+<!-- Image avec card de moi  -->
 <div class="hero-visual">
-        <span class="glow" aria-hidden="true"></span>
-        <div class="arch">
-          <img src="assets/akram.png" alt="Portrait d'Akram Bouzidi">
-        </div>
- 
+
+  <div class="label">Dark Glassmorphism Orb</div>
+
+  <!-- Vague de fond -->
+  <svg class="bg-wave" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#22c55e" stop-opacity="0.6" />
+        <stop offset="25%" stop-color="#8b5cf6" />
+        <stop offset="55%" stop-color="#f5f3ff" />
+        <stop offset="80%" stop-color="#a855f7" />
+        <stop offset="100%" stop-color="#3b82f6" />
+      </linearGradient>
+      <linearGradient id="waveGrad2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#3b82f6" />
+        <stop offset="50%" stop-color="#d946ef" />
+        <stop offset="100%" stop-color="#8b5cf6" />
+      </linearGradient>
+    </defs>
+    <path class="w1" d="M0,170 C240,200 420,230 640,170 C860,110 1080,60 1440,120" />
+    <path class="w2" d="M0,190 C260,220 460,240 700,180 C920,125 1120,85 1440,140" />
+  </svg>
+
+  <div class="container" id="orbContainer" role="button" tabindex="0" aria-pressed="false" aria-label="Clique pour me voir">
+    <div class="ring"></div>
+    <div class="sphere"></div>
+    <canvas id="orbCanvas"></canvas>
+
+    <div class="photo-wrapper">
+      <div class="photo-fallback">AB</div>
+      <!-- Remplace "photo.jpg" par le chemin de ta vraie photo -->
+      <img id="photo" src="asset/me22.png" alt="Portrait d'Akram" />
+    </div>
+
+    <div class="hover-text">Clique pour me voir</div>
+  </div>
+
+  <!-- card Volante image -->
         <div class="card card-code" aria-hidden="true">
           <div class="win-dots"><span></span><span></span><span></span></div>
           <pre><span class="k">const</span> akram = <span class="v">dev</span>;
@@ -122,7 +164,7 @@ akram.<span class="f">cherche</span>(
   <span class="s">"alternance"</span>
 );</pre>
         </div>
- 
+ <!-- Deuxieme card volant iamge -->
         <div class="card card-stack">
           <p class="card-label">Mon socle</p>
           <ul class="chips">
@@ -131,6 +173,7 @@ akram.<span class="f">cherche</span>(
             <li>JavaScript</li>
           </ul>
         </div>
+        
   </div>
  
 <!-- Tuiles : la structure du portfolio -->

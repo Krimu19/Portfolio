@@ -478,7 +478,7 @@ margin-bottom: 50px;
   align-items: center;
   gap: 40px;
   padding: 150px 80px 60px;
-  max-width: 1440px;
+  max-width: 2600px;
   margin: 0 auto;
 }
  
@@ -733,6 +733,244 @@ margin-bottom: 50px;
   html { scroll-behavior: auto; }
   * { animation: none !important; transition: none !important; }
 }
+
+/* ------------- Waves BG -------------- */
+.spline-container {
+  position: absolute;
+  top: -15%;
+  left: 0%;
+  width: 100vw;   /* Ajuste la taille selon tes préférences */
+  height: 100vh;  /* Ajuste la taille selon tes préférences */
+  z-index: 0;
+  overflow: hidden; /* Cache ce qui dépasse (le logo en bas) */
+  pointer-events: none; /* permet de cliquer sur le text a travers la waves */
+  mix-blend-mode: screen; 
+}
+
+.spline-container spline-viewer {
+  width: 100%;
+  height: 115%; /* Légèrement plus grand pour pousser le logo hors du cadre */
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  /* C'est LA ligne magique : elle prend le fond noir et le rend 100% transparent, 
+     tout en gardant les couleurs lumineuses de ta wave intactes ! */
+  mix-blend-mode: screen; 
+}
+
+/* --------------- Sphere image de moi ------------------- */
+    /* ===== Vague animée en arrière-plan ===== */
+    .bg-wave {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 6%;
+      width: 100%;
+      height: 260px;
+      opacity: 0.75;
+      pointer-events: none;
+      filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.55));
+    }
+    .bg-wave path {
+      fill: none;
+      stroke-linecap: round;
+    }
+    .bg-wave .w1 { stroke: url(#waveGrad); stroke-width: 2.5; animation: waveMove 9s ease-in-out infinite; }
+    .bg-wave .w2 { stroke: url(#waveGrad2); stroke-width: 1.5; opacity: 0.6; animation: waveMove 11s ease-in-out infinite reverse; }
+    @keyframes waveMove {
+      0%, 100% { transform: translateY(0) scaleY(1); }
+      50% { transform: translateY(14px) scaleY(0.88); }
+    }
+
+    /* ===== Conteneur cliquable ===== */
+    .container {
+      position: relative;
+      width: 360px;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+    .container:focus-visible .ring { opacity: 1; border-color: rgba(217, 70, 239, 0.8); }
+
+    /* ===== LA SPHÈRE ===== */
+    .sphere {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.05) 22%, transparent 40%),
+        radial-gradient(circle at 70% 82%, rgba(217, 70, 239, 0.38) 0%, transparent 48%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.20) 0%, rgba(24, 10, 52, 0.62) 68%, rgba(88, 28, 135, 0.45) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(196, 160, 255, 0.28);
+      box-shadow:
+        0 0 55px rgba(139, 92, 246, 0.40),
+        0 0 110px rgba(217, 70, 239, 0.22),
+        inset 0 0 40px rgba(168, 85, 247, 0.22),
+        inset 0 -30px 50px rgba(0, 0, 0, 0.45);
+      transition: transform 0.85s cubic-bezier(0.34, 1.4, 0.64, 1), filter 0.6s ease, box-shadow 0.6s ease;
+    }
+
+    /* Reflet haut + lueur basse */
+    .sphere::before {
+      content: '';
+      position: absolute;
+      top: 8%; left: 16%;
+      width: 46%; height: 26%;
+      background: radial-gradient(ellipse, rgba(255, 255, 255, 0.40) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: 3;
+    }
+    .sphere::after {
+      content: '';
+      position: absolute;
+      bottom: 7%; left: 24%;
+      width: 52%; height: 18%;
+      background: radial-gradient(ellipse, rgba(236, 72, 153, 0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Canvas 3D (maillage + vagues qui tournent) */
+    #orbCanvas {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+
+    /* Anneau externe */
+    .ring {
+      position: absolute;
+      width: 316px;
+      height: 316px;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 130, 255, 0.28);
+      box-shadow: 0 0 28px rgba(139, 92, 246, 0.35), inset 0 0 28px rgba(217, 70, 239, 0.14);
+      opacity: 0.65;
+      transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .container:hover .ring { opacity: 1; transform: scale(1.04); }
+
+    /* ===== Texte au hover ===== */
+    .hover-text {
+      position: absolute;
+      bottom: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #f1e9ff;
+      background: rgba(24, 14, 48, 0.55);
+      border: 1px solid rgba(168, 130, 255, 0.35);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 22px rgba(139, 92, 246, 0.35);
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 20;
+    }
+    .container:hover .hover-text { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+    .container.opened .hover-text { opacity: 0 !important; }
+
+    /* ===== Photo ===== */
+    .photo-wrapper {
+      position: absolute;
+      width: 214px;
+      height: 214px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0.4);
+      transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+      background: linear-gradient(145deg, #7c3aed, #d946ef);
+      box-shadow:
+        0 0 0 2px rgba(216, 180, 254, 0.35),
+        0 14px 44px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(168, 85, 247, 0.55);
+      pointer-events: none;
+    }
+    .photo-wrapper img {
+      position: relative;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 2;
+    }
+    /* Fallback si la photo n'est pas trouvée */
+    .photo-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #fff;
+      z-index: 1;
+    }
+    .photo-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      box-shadow: inset 0 0 18px rgba(217, 70, 239, 0.25);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ===== État ouvert ===== */
+    .container.opened .sphere {
+      transform: scale(0.94);
+      filter: brightness(0.8) saturate(1.1);
+      box-shadow:
+        0 0 70px rgba(168, 85, 247, 0.5),
+        0 0 130px rgba(217, 70, 239, 0.3),
+        inset 0 0 40px rgba(168, 85, 247, 0.22),
+        inset 0 -30px 50px rgba(0, 0, 0, 0.45);
+    }
+    .container.opened #orbCanvas { opacity: 0.28; }
+    .container.opened .photo-wrapper { opacity: 1; transform: scale(1); }
+    .container.opened .ring { opacity: 0.95; transform: scale(1.06); border-color: rgba(217, 70, 239, 0.45); }
+
+
+    .label {
+      position: absolute;
+      top: 28px;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(196, 160, 255, 0.45);
+      z-index: 5;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-wave path { animation: none; }
+    }
  
 /*===============================================  SECTION PROJETS  =======================================*/
 .projects-section {
@@ -1904,148 +2142,3 @@ article h3 {
 
 
 
-
-/* ================================================
-   TECH STACK 3D - DISPOSITION FIDÈLE & TRANCHE DE VERRE
-================================================= */
-
-.tech-stack-container {
-  position: absolute;
-  top: 10%;
-  left: 4%; /* Ajusté pour se placer parfaitement à gauche du texte sans le chevaucher */
-  width: 480px;
-  height: 520px;
-  pointer-events: none;
-  z-index: 10;
-}
-
-/* Style des cartes : effet de bloc de verre massif avec épaisseur prononcée */
-.glass-card {
-  position: absolute;
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.16) 0%,
-    rgba(139, 92, 246, 0.12) 40%,
-    rgba(15, 8, 35, 0.8) 100%
-  );
-  /* Tranche de verre biseautée et ombres portées massives 3D */
-  border: 2px solid rgba(221, 214, 254, 0.4);
-  border-top: 3.5px solid rgba(255, 255, 255, 0.9);
-  border-left: 3.5px solid rgba(255, 255, 255, 0.65);
-  box-shadow: 
-    0 30px 60px rgba(0, 0, 0, 0.95),
-    0 12px 25px rgba(139, 92, 246, 0.4),
-    inset 0 2px 5px rgba(255, 255, 255, 0.85),
-    inset 0 -4px 10px rgba(109, 40, 217, 0.7),
-    inset 3px 0 6px rgba(255, 255, 255, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Reflet lumineux supérieur typique du verre */
-.glass-card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 45%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.28) 0%, rgba(255, 255, 255, 0) 100%);
-  border-radius: inherit;
-  pointer-events: none;
-}
-
-/* Positions et espacements exacts calqués sur l'image de référence */
-.card-github {
-  width: 185px;
-  height: 185px;
-  border-radius: 38px;
-  top: 0%;
-  left: 115px;
-  transform: rotate(-6deg);
-  animation: floatCard1 6s ease-in-out infinite;
-  z-index: 50;
-}
-
-.card-react {
-  width: 95px;
-  height: 95px;
-  border-radius: 26px;
-  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
-  top: 4%;
-  left: 355px;
-  transform: rotate(12deg);
-  animation: floatCard2 5.5s ease-in-out infinite;
-  z-index: 60;
-  background: linear-gradient(135deg, rgba(97, 218, 251, 0.22), rgba(139, 92, 246, 0.15));
-}
-
-.card-js {
-  width: 130px;
-  height: 175px;
-  border-radius: 30px;
-  top: 45px;
-  left: 15px;
-  transform: rotate(-12deg);
-  animation: floatCard3 6.5s ease-in-out infinite;
-  z-index: 20;
-}
-
-.card-css {
-  width: 155px;
-  height: 205px;
-  border-radius: 34px;
-  top: 55px;
-  left: 240px;
-  transform: rotate(8deg);
-  animation: floatCard2 6.2s ease-in-out infinite;
-  z-index: 30;
-  background: linear-gradient(135deg, rgba(41, 101, 241, 0.22), rgba(139, 92, 246, 0.12));
-}
-
-.card-html {
-  width: 175px;
-  height: 190px;
-  border-radius: 36px;
-  top: 155px;
-  left: 85px;
-  transform: rotate(-3deg);
-  animation: floatCard1 5.8s ease-in-out infinite;
-  z-index: 70; /* Au premier plan au centre */
-}
-
-.card-bitwarden {
-  width: 105px;
-  height: 105px;
-  border-radius: 28px;
-  clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
-  top: 275px;
-  left: 295px;
-  transform: rotate(15deg);
-  animation: floatCard3 6.4s ease-in-out infinite;
-  z-index: 60;
-  background: linear-gradient(135deg, rgba(23, 93, 220, 0.28), rgba(139, 92, 246, 0.14));
-}
-
-/* Animations de lévitation fluides et autonomes */
-@keyframes floatCard1 {
-  0%, 100% { transform: translateY(0px) rotate(-6deg); }
-  50% { transform: translateY(-10px) rotate(-6deg); }
-}
-
-@keyframes floatCard2 {
-  0%, 100% { transform: translateY(0px) rotate(12deg); }
-  50% { transform: translateY(-12px) rotate(12deg); }
-}
-
-@keyframes floatCard3 {
-  0%, 100% { transform: translateY(0px) rotate(-12deg); }
-  50% { transform: translateY(-8px) rotate(-12deg); }
-}
-
-.icon-svg {
-  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.65));
-}

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orbe Glassmorphism - Akram Bouzidi</title>
+  <style>
+    :root {
+      --violet: #8b5cf6;
+      --purple: #a855f7;
+      --pink: #d946ef;
+      --blue: #3b82f6;
+      --bg: #05040c;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      color: #e8e4f5;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* ===== Ambiance de fond (halos violet / rose + grille de points) ===== */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 12% 8%, rgba(124, 58, 237, 0.38) 0%, transparent 42%),
+        radial-gradient(circle at 92% 12%, rgba(168, 85, 247, 0.30) 0%, transparent 40%),
+        radial-gradient(circle at 88% 85%, rgba(217, 70, 239, 0.22) 0%, transparent 42%),
+        radial-gradient(circle at 25% 95%, rgba(59, 130, 246, 0.16) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    body::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+      background-size: 28px 28px;
+      mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 70%);
+      -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ===== Vague animée en arrière-plan ===== */
+    .bg-wave {
+      position: absolute;
+      left: 0; right: 0;
+      bottom: 6%;
+      width: 100%;
+      height: 260px;
+      opacity: 0.75;
+      pointer-events: none;
+      filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.55));
+    }
+    .bg-wave path {
+      fill: none;
+      stroke-linecap: round;
+    }
+    .bg-wave .w1 { stroke: url(#waveGrad); stroke-width: 2.5; animation: waveMove 9s ease-in-out infinite; }
+    .bg-wave .w2 { stroke: url(#waveGrad2); stroke-width: 1.5; opacity: 0.6; animation: waveMove 11s ease-in-out infinite reverse; }
+    @keyframes waveMove {
+      0%, 100% { transform: translateY(0) scaleY(1); }
+      50% { transform: translateY(14px) scaleY(0.88); }
+    }
+
+    /* ===== Conteneur cliquable ===== */
+    .container {
+      position: relative;
+      width: 360px;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 5;
+      -webkit-tap-highlight-color: transparent;
+      outline: none;
+    }
+    .container:focus-visible .ring { opacity: 1; border-color: rgba(217, 70, 239, 0.8); }
+
+    /* ===== LA SPHÈRE ===== */
+    .sphere {
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 30% 24%, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0.05) 22%, transparent 40%),
+        radial-gradient(circle at 70% 82%, rgba(217, 70, 239, 0.38) 0%, transparent 48%),
+        radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.20) 0%, rgba(24, 10, 52, 0.62) 68%, rgba(88, 28, 135, 0.45) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(196, 160, 255, 0.28);
+      box-shadow:
+        0 0 55px rgba(139, 92, 246, 0.40),
+        0 0 110px rgba(217, 70, 239, 0.22),
+        inset 0 0 40px rgba(168, 85, 247, 0.22),
+        inset 0 -30px 50px rgba(0, 0, 0, 0.45);
+      transition: transform 0.85s cubic-bezier(0.34, 1.4, 0.64, 1), filter 0.6s ease, box-shadow 0.6s ease;
+    }
+
+    /* Reflet haut + lueur basse */
+    .sphere::before {
+      content: '';
+      position: absolute;
+      top: 8%; left: 16%;
+      width: 46%; height: 26%;
+      background: radial-gradient(ellipse, rgba(255, 255, 255, 0.40) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: 3;
+    }
+    .sphere::after {
+      content: '';
+      position: absolute;
+      bottom: 7%; left: 24%;
+      width: 52%; height: 18%;
+      background: radial-gradient(ellipse, rgba(236, 72, 153, 0.35) 0%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(8px);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* Canvas 3D (maillage + vagues qui tournent) */
+    #orbCanvas {
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      z-index: 2;
+      pointer-events: none;
+      transition: opacity 0.7s ease;
+    }
+
+    /* Anneau externe */
+    .ring {
+      position: absolute;
+      width: 316px;
+      height: 316px;
+      border-radius: 50%;
+      border: 1px solid rgba(168, 130, 255, 0.28);
+      box-shadow: 0 0 28px rgba(139, 92, 246, 0.35), inset 0 0 28px rgba(217, 70, 239, 0.14);
+      opacity: 0.65;
+      transition: opacity 0.4s ease, transform 0.4s ease, border-color 0.4s ease;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .container:hover .ring { opacity: 1; transform: scale(1.04); }
+
+    /* ===== Texte au hover ===== */
+    .hover-text {
+      position: absolute;
+      bottom: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 8px 18px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      color: #f1e9ff;
+      background: rgba(24, 14, 48, 0.55);
+      border: 1px solid rgba(168, 130, 255, 0.35);
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 0 0 22px rgba(139, 92, 246, 0.35);
+      opacity: 0;
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      pointer-events: none;
+      white-space: nowrap;
+      z-index: 20;
+    }
+    .container:hover .hover-text { opacity: 1; transform: translateX(-50%) translateY(-6px); }
+    .container.opened .hover-text { opacity: 0 !important; }
+
+    /* ===== Photo ===== */
+    .photo-wrapper {
+      position: absolute;
+      width: 214px;
+      height: 214px;
+      border-radius: 50%;
+      overflow: hidden;
+      z-index: 10;
+      opacity: 0;
+      transform: scale(0.4);
+      transition:
+        opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.1s,
+        transform 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.05s;
+      background: linear-gradient(145deg, #7c3aed, #d946ef);
+      box-shadow:
+        0 0 0 2px rgba(216, 180, 254, 0.35),
+        0 14px 44px rgba(0, 0, 0, 0.6),
+        0 0 40px rgba(168, 85, 247, 0.55);
+      pointer-events: none;
+    }
+    .photo-wrapper img {
+      position: relative;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+      z-index: 2;
+    }
+    /* Fallback si la photo n'est pas trouvée */
+    .photo-fallback {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.4rem;
+      font-weight: 800;
+      color: #fff;
+      z-index: 1;
+    }
+    .photo-wrapper::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.28);
+      box-shadow: inset 0 0 18px rgba(217, 70, 239, 0.25);
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    /* ===== État ouvert ===== */
+    .container.opened .sphere {
+      transform: scale(0.94);
+      filter: brightness(0.8) saturate(1.1);
+      box-shadow:
+        0 0 70px rgba(168, 85, 247, 0.5),
+        0 0 130px rgba(217, 70, 239, 0.3),
+        inset 0 0 40px rgba(168, 85, 247, 0.22),
+        inset 0 -30px 50px rgba(0, 0, 0, 0.45);
+    }
+    .container.opened #orbCanvas { opacity: 0.28; }
+    .container.opened .photo-wrapper { opacity: 1; transform: scale(1); }
+    .container.opened .ring { opacity: 0.95; transform: scale(1.06); border-color: rgba(217, 70, 239, 0.45); }
+
+    /* ===== Consigne ===== */
+    .instruction {
+      margin-top: 86px;
+      font-size: 0.85rem;
+      color: rgba(190, 180, 225, 0.5);
+      letter-spacing: 0.03em;
+      text-align: center;
+      max-width: 360px;
+      line-height: 1.6;
+      z-index: 5;
+    }
+    .instruction span { color: rgba(196, 160, 255, 0.85); }
+
+    .label {
+      position: absolute;
+      top: 28px;
+      font-size: 0.75rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(196, 160, 255, 0.45);
+      z-index: 5;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .bg-wave path { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="label">Dark Glassmorphism Orb</div>
+
+  <!-- Vague de fond -->
+  <svg class="bg-wave" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#22c55e" stop-opacity="0.6" />
+        <stop offset="25%" stop-color="#8b5cf6" />
+        <stop offset="55%" stop-color="#f5f3ff" />
+        <stop offset="80%" stop-color="#a855f7" />
+        <stop offset="100%" stop-color="#3b82f6" />
+      </linearGradient>
+      <linearGradient id="waveGrad2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#3b82f6" />
+        <stop offset="50%" stop-color="#d946ef" />
+        <stop offset="100%" stop-color="#8b5cf6" />
+      </linearGradient>
+    </defs>
+    <path class="w1" d="M0,170 C240,200 420,230 640,170 C860,110 1080,60 1440,120" />
+    <path class="w2" d="M0,190 C260,220 460,240 700,180 C920,125 1120,85 1440,140" />
+  </svg>
+
+  <div class="container" id="orbContainer" role="button" tabindex="0" aria-pressed="false" aria-label="Clique pour me voir">
+    <div class="ring"></div>
+    <div class="sphere"></div>
+    <canvas id="orbCanvas"></canvas>
+
+    <div class="photo-wrapper">
+      <div class="photo-fallback">AB</div>
+      <!-- Remplace "photo.jpg" par le chemin de ta vraie photo -->
+      <img id="photo" src="photo.jpg" alt="Portrait d'Akram" />
+    </div>
+
+    <div class="hover-text">Clique pour me voir</div>
+  </div>
+
+  <p class="instruction">
+    L’orbe tourne en continu · survole-la → le message apparaît<br>
+    Clique → elle s’arrête et la photo sort<br>
+    <span>Clique à nouveau pour refermer et relancer la rotation</span>
+  </p>
+
+  <script>
+    const container = document.getElementById('orbContainer');
+    const canvas = document.getElementById('orbCanvas');
+    const ctx = canvas.getContext('2d');
+    const photo = document.getElementById('photo');
+
+    // Si la photo est introuvable, on garde les initiales
+    photo.addEventListener('error', () => { photo.style.display = 'none'; });
+
+    /* ---------- Ouverture / fermeture ---------- */
+    let opened = false;
+    function toggle() {
+      opened = !opened;
+      container.classList.toggle('opened', opened);
+      container.setAttribute('aria-pressed', String(opened));
+    }
+    container.addEventListener('click', toggle);
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
+    /* ---------- Canvas 3D ---------- */
+    const SIZE = 360;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = SIZE * dpr;
+    canvas.height = SIZE * dpr;
+    ctx.scale(dpr, dpr);
+
+    const CX = SIZE / 2, CY = SIZE / 2, R = 138;
+    const TILT = 0.38;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const BASE_SPEED = reduce ? 0.12 : 0.55; // rad/s
+
+    let ang = 0;        // rotation de la sphère
+    let phase = 0;      // phase des vagues (liée à la rotation => tout s'arrête ensemble)
+    let speed = BASE_SPEED;
+
+    // Palette : violet -> rose -> bleu
+    const stops = [
+      [139, 92, 246],  // violet
+      [217, 70, 239],  // rose/fuchsia
+      [59, 130, 246],  // bleu
+    ];
+    function palette(t) {
+      t = Math.max(0, Math.min(1, t)) * (stops.length - 1);
+      const i = Math.min(Math.floor(t), stops.length - 2);
+      const f = t - i;
+      const a = stops[i], b = stops[i + 1];
+      return [a[0] + (b[0] - a[0]) * f, a[1] + (b[1] - a[1]) * f, a[2] + (b[2] - a[2]) * f];
+    }
+    const rgba = (c, a) => `rgba(${c[0] | 0},${c[1] | 0},${c[2] | 0},${a})`;
+
+    // Projection 3D -> 2D (rotation Y puis inclinaison X)
+    function project(x, y, z) {
+      const ca = Math.cos(ang), sa = Math.sin(ang);
+      const x1 = x * ca + z * sa;
+      const z1 = -x * sa + z * ca;
+      const ct = Math.cos(TILT), st = Math.sin(TILT);
+      const y2 = y * ct - z1 * st;
+      const z2 = y * st + z1 * ct;
+      const s = 1 + z2 * 0.0006;
+      return { x: CX + x1 * s, y: CY + y2 * s, z: z2 / R }; // z dans [-1, 1]
+    }
+
+    // Points façon Fibonacci
+    const dots = [];
+    const N = 230;
+    for (let i = 0; i < N; i++) {
+      const y = 1 - (i / (N - 1)) * 2;
+      const r = Math.sqrt(1 - y * y);
+      const th = i * 2.399963;
+      dots.push({ x: Math.cos(th) * r * R, y: y * R, z: Math.sin(th) * r * R });
+    }
+
+    function drawMesh() {
+      ctx.lineWidth = 0.8;
+      // Méridiens
+      const LON = 12, SEG = 36;
+      for (let i = 0; i < LON; i++) {
+        const lon = (i / LON) * Math.PI * 2;
+        let prev = null;
+        for (let j = 0; j <= SEG; j++) {
+          const lat = -Math.PI / 2 + (j / SEG) * Math.PI;
+          const p = project(
+            Math.cos(lat) * Math.cos(lon) * R,
+            Math.sin(lat) * R,
+            Math.cos(lat) * Math.sin(lon) * R
+          );
+          if (prev) {
+            const depth = (p.z + prev.z) / 2;
+            const a = 0.06 + (depth + 1) * 0.16;
+            ctx.strokeStyle = rgba(palette((j / SEG)), a);
+            ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+          }
+          prev = p;
+        }
+      }
+      // Parallèles
+      const LAT = 8, SEG2 = 56;
+      for (let i = 1; i < LAT; i++) {
+        const lat = -Math.PI / 2 + (i / LAT) * Math.PI;
+        let prev = null;
+        for (let j = 0; j <= SEG2; j++) {
+          const lon = (j / SEG2) * Math.PI * 2;
+          const p = project(
+            Math.cos(lat) * Math.cos(lon) * R,
+            Math.sin(lat) * R,
+            Math.cos(lat) * Math.sin(lon) * R
+          );
+          if (prev) {
+            const depth = (p.z + prev.z) / 2;
+            const a = 0.05 + (depth + 1) * 0.14;
+            ctx.strokeStyle = rgba(palette(i / LAT), a);
+            ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+          }
+          prev = p;
+        }
+      }
+    }
+
+    function drawDots() {
+      for (const d of dots) {
+        const p = project(d.x, d.y, d.z);
+        const t = (d.y / R + 1) / 2;
+        const a = 0.12 + (p.z + 1) * 0.42;
+        ctx.fillStyle = rgba(palette(1 - t), a);
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 0.7 + (p.z + 1) * 0.95, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // Ruban ondulant qui s'enroule autour de la sphère (la "wave")
+    function drawRibbon(amp, freq, ph, radius, width, colorShift) {
+      const STEPS = 160;
+      let prev = null;
+      for (let i = 0; i <= STEPS; i++) {
+        const th = (i / STEPS) * Math.PI * 2;
+        const lat = amp * Math.sin(freq * th + ph);
+        const rr = radius * R;
+        const p = project(
+          Math.cos(lat) * Math.cos(th) * rr,
+          Math.sin(lat) * rr,
+          Math.cos(lat) * Math.sin(th) * rr
+        );
+        if (prev) {
+          const depth = (p.z + prev.z) / 2;
+          const front = depth > 0;
+          const c = palette(((i / STEPS) + colorShift) % 1);
+          // blanchit légèrement au centre du ruban de devant (comme ta wave)
+          const mix = front ? Math.max(0, depth) * 0.55 : 0;
+          const col = [c[0] + (255 - c[0]) * mix, c[1] + (255 - c[1]) * mix, c[2] + (255 - c[2]) * mix];
+          ctx.strokeStyle = rgba(col, front ? 0.55 + depth * 0.45 : 0.14 + (depth + 1) * 0.12);
+          ctx.lineWidth = width * (front ? 0.8 + depth * 0.8 : 0.6);
+          ctx.beginPath(); ctx.moveTo(prev.x, prev.y); ctx.lineTo(p.x, p.y); ctx.stroke();
+        }
+        prev = p;
+      }
+    }
+
+    // Halo derrière le ruban (pour le côté néon)
+    function drawGlowRibbon() {
+      ctx.save();
+      ctx.shadowColor = 'rgba(168, 85, 247, 0.9)';
+      ctx.shadowBlur = 14;
+      drawRibbon(0.42, 3, phase * 1.6, 1.02, 2.4, 0.0);
+      ctx.shadowColor = 'rgba(217, 70, 239, 0.8)';
+      drawRibbon(0.30, 2, -phase * 1.2 + 1.4, 1.04, 1.8, 0.45);
+      ctx.restore();
+      ctx.shadowBlur = 0;
+      drawRibbon(0.18, 5, phase * 2.0 + 0.7, 1.0, 1.1, 0.7);
+    }
+
+    let last = performance.now();
+    function frame(now) {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      // Ralentit en douceur jusqu'à l'arrêt, ou relance en douceur
+      const target = opened ? 0 : BASE_SPEED;
+      speed += (target - speed) * Math.min(1, dt * 3.2);
+      if (opened && speed < 0.002) speed = 0;
+
+      ang += speed * dt;
+      phase += speed * dt;
+
+      ctx.clearRect(0, 0, SIZE, SIZE);
+      drawMesh();
+      drawDots();
+      drawGlowRibbon();
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>
