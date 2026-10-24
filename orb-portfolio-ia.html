@@ -1,0 +1,110 @@
+
+<body>
+  <div class="label">Dark Glassmorphism · AI Orb</div>
+
+  <!-- Vague de fond -->
+  <svg class="bg-wave" viewBox="0 0 1440 260" preserveAspectRatio="none" aria-hidden="true">
+    <defs>
+      <linearGradient id="waveGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#22c55e" stop-opacity="0.6" />
+        <stop offset="25%" stop-color="#8b5cf6" />
+        <stop offset="55%" stop-color="#f5f3ff" />
+        <stop offset="80%" stop-color="#a855f7" />
+        <stop offset="100%" stop-color="#3b82f6" />
+      </linearGradient>
+      <linearGradient id="waveGrad2" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#3b82f6" />
+        <stop offset="50%" stop-color="#d946ef" />
+        <stop offset="100%" stop-color="#8b5cf6" />
+      </linearGradient>
+    </defs>
+    <path class="w1" d="M0,170 C240,200 420,230 640,170 C860,110 1080,60 1440,120" />
+    <path class="w2" d="M0,190 C260,220 460,240 700,180 C920,125 1120,85 1440,140" />
+  </svg>
+
+  <div class="container" id="orbContainer" role="button" tabindex="0" aria-pressed="false" aria-label="Clique pour me voir">
+    <div class="aura"></div>
+    <div class="halo-ring"></div>
+
+    <div class="sphere">
+      <div class="fluid">
+        <div class="core"></div>
+        <div class="orbit o1"><div class="blob"></div></div>
+        <div class="orbit o2"><div class="blob"></div></div>
+        <div class="orbit o3"><div class="blob"></div></div>
+        <div class="spark"></div>
+        <div class="ring3d-wrap r3"><div class="ring3d"></div></div>
+        <div class="ring3d-wrap r1"><div class="ring3d"></div></div>
+        <div class="ring3d-wrap r2"><div class="ring3d"></div></div>
+      </div>
+      <div class="depth"></div>
+      <div class="glass"></div>
+    </div>
+
+    <div class="photo-wrapper">
+      <div class="photo-fallback">AB</div>
+      <!-- Remplace "photo.jpg" par le chemin de ta vraie photo -->
+      <img id="photo" src="photo.jpg" alt="Portrait d'Akram" />
+    </div>
+
+    <div class="hover-text">Clique pour me voir</div>
+  </div>
+
+  <p class="instruction">
+    L’orbe vit en continu · survole-la → le message apparaît<br>
+    Clique → elle se fige et la photo sort<br>
+    <span>Clique à nouveau pour refermer et relancer l’animation</span>
+  </p>
+
+  <script>
+    const container = document.getElementById('orbContainer');
+    const photo = document.getElementById('photo');
+
+    // Si la photo est introuvable, on garde les initiales
+    photo.addEventListener('error', () => { photo.style.display = 'none'; });
+
+    /* ---------- Ouverture / fermeture ---------- */
+    let opened = false;
+    function toggle() {
+      opened = !opened;
+      container.classList.toggle('opened', opened);
+      container.setAttribute('aria-pressed', String(opened));
+    }
+    container.addEventListener('click', toggle);
+    container.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
+    /* ---------- Ralentissement / reprise fluide de l'animation ---------- */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const BASE_RATE = reduce ? 0.25 : 1;
+    let rate = BASE_RATE;
+    let sphereAnims = [];
+
+    window.addEventListener('load', () => {
+      sphereAnims = document.getAnimations().filter(a =>
+        typeof CSSAnimation !== 'undefined' &&
+        a instanceof CSSAnimation &&
+        a.effect && a.effect.target &&
+        a.effect.target.closest('.sphere')
+      );
+    });
+
+    let last = performance.now();
+    function frame(now) {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      const target = opened ? 0 : BASE_RATE;
+      rate += (target - rate) * Math.min(1, dt * 3.2);
+      if (opened && rate < 0.004) rate = 0;
+      if (!opened && Math.abs(rate - BASE_RATE) < 0.004) rate = BASE_RATE;
+
+      for (const a of sphereAnims) a.playbackRate = rate;
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  </script>
+</body>
+</html>

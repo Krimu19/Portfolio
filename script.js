@@ -347,38 +347,62 @@ if (burger && menu) {
 
 
 
+// FONCTION POUR LA SPHERE AVEC IMAGE DANS LE HERO 
+
+    const container2 = document.getElementById('orbContainer');
+    const photo = document.getElementById('photo');
+
+    // Si la photo est introuvable, on garde les initiales
+    photo.addEventListener('error', () => { photo.style.display = 'none'; });
+
+    /* ---------- Ouverture / fermeture ---------- */
+    let opened = false;
+    function toggle() {
+      opened = !opened;
+      container2.classList.toggle('opened', opened);
+      container2.setAttribute('aria-pressed', String(opened));
+    }
+    container2.addEventListener('click', toggle);
+    container2.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+    });
+
+    /* ---------- Ralentissement / reprise fluide de l'animation ---------- */
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const BASE_RATE = reduce ? 0.25 : 1;
+    let rate = BASE_RATE;
+    let sphereAnims = [];
+
+    window.addEventListener('load', () => {
+      sphereAnims = document.getAnimations().filter(a =>
+        typeof CSSAnimation !== 'undefined' &&
+        a instanceof CSSAnimation &&
+        a.effect && a.effect.target &&
+        a.effect.target.closest('.sphere')
+      );
+    });
+
+    let last = performance.now();
+    function frame(now) {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+
+      const target = opened ? 0 : BASE_RATE;
+      rate += (target - rate) * Math.min(1, dt * 3.2);
+      if (opened && rate < 0.004) rate = 0;
+      if (!opened && Math.abs(rate - BASE_RATE) < 0.004) rate = BASE_RATE;
+
+      for (const a of sphereAnims) a.playbackRate = rate;
+
+      requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
 
 
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// FONCTION ?
 const container = document.getElementById('sceneContainer');
 const stage = document.getElementById('stage3d');
 
